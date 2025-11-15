@@ -1,6 +1,6 @@
 [project]
 name = "coregenai"
-version = "0.1.0"
+version = "0.2.0"
 description = "CoreGenAI is the unified Python SDK for Google's Generative AI that eliminates confusion, handles complexity, and just works."
 authors = [{ name = "Saadman Rafat", email = "saadman@outlook.com" }]
 keywords = ["gemini", "vertex-ai", "google", "ai", "llm", "generative-ai", "genai"]

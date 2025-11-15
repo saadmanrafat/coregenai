@@ -3,7 +3,7 @@
 
 > Built with frustration from using Google's fragmented SDKs.
 
-<img src="ext/coregenai.png" alt="CoreGenAI">
+![](ext/coregenai.png)
 
 ### This is an experimental prototype (coregenai v0.1.0)
 
