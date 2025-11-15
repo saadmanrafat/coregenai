@@ -125,7 +125,7 @@ async def coregenai(use_vertex=True):
             user_input = input("\n> ").strip()
             if not user_input:
                 continue
-            async for chunk in chat.send_message_stream(user_input):
+            async for chunk in await chat.send_message_stream(user_input):
                 print(chunk.text, end="")
         except (KeyboardInterrupt, EOFError):
             print("\nGoodbye!")
