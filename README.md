@@ -10,15 +10,53 @@
 ## Example
 
 ```python
-from coregenai import CoreGenAIClient
+import os
 
-client = CoreGenAIClient(backend="vertexai") # or google-genai
-response = client.generate_text("Why does Google API Documentation's suck?")
-print(response)
+async def coregenai(use_vertex=True):
+    """
+    Run an interactive streaming chat session with Google GenAI.
+    
+    Creates a persistent chat session that maintains conversation context
+    and streams responses in real-time.
+    
+    Args:
+        use_vertex: Whether to use Vertex AI (True) or Gemini (False).
+                   Currently defaults to True but parameter is unused.
+    
+    Environment Variables:
+        MODEL_NAME: Name of the model to use (e.g., 'gemini-2.0-flash-exp').
+    
+    Raises:
+        KeyboardInterrupt: User pressed Ctrl+C to exit.
+        EOFError: Input stream ended (e.g., pipe closed).
+    
+    Examples:
+        >>> asyncio.run(coregenai())
+        > Hello!
+        Hello! How can I help you today?
+        > What is Python?
+        Python is a high-level programming language...
+    
+    Notes:
+        - Empty inputs are ignored
+        - Press Ctrl+C or Ctrl+D to exit
+        - Conversation context is maintained throughout the session
+    """
+    client = get_generative_client(ClientType.VERTEX_AI)
+    chat = client.aio.chats.create(
+        model=os.environ.get("MODEL_NAME"),
+    )
+    while True:
+        try:
+            user_input = input("\n> ").strip()
+            if not user_input:
+                continue
+            async for chunk in await chat.send_message_stream(user_input):
+                print(chunk.text, end="")
+        except (KeyboardInterrupt, EOFError):
+            print("\nGoodbye!")
+            break
 
-# Or stream it
-for chunk in client.stream_generate_text("Please make Google docs better?"):
-    print(chunk, end="", flush=True)
 ```
 
 ## Features
