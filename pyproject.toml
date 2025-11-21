@@ -1,6 +1,6 @@
 [project]
 name = "coregenai"
-version = "0.3.0"
+version = "0.3.1"
 description = "The Production-Grade Wrapper for Google Gemini."
 authors = [{ name = "Saadman Rafat", email = "saadman@outlook.com" }]
 keywords = ["gemini", "vertex-ai", "google", "ai", "llm", "generative-ai", "genai"]
@@ -28,6 +28,10 @@ dev = [
     "pytest-cov>=7.0.0",
     "pytest-mock>=3.15.1",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/saadmanrafat/coregenai"
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
