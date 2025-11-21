@@ -4,6 +4,7 @@ import time
 
 from typing import Any, TypeVar
 
+import google.auth
 from google import genai
 from google.genai import types
 from pydantic import BaseModel
@@ -14,11 +15,19 @@ from coregenai.retry import with_retry
 
 T = TypeVar("T", bound=BaseModel)
 
+
 class SafetyViolationError(Exception):
     """Raised when Google Safety Filters block the response."""
+
     def __init__(self, reason: str, ratings: list):
         self.reason = reason
-        details = ", ".join([f"{r.category}: {r.probability}" for r in ratings if r.probability != "NEGLIGIBLE"])
+        details = ", ".join(
+            [
+                f"{r.category}: {r.probability}"
+                for r in ratings
+                if r.probability != "NEGLIGIBLE"
+            ]
+        )
         super().__init__(f"Safety Block [{reason}]: {details}")
 
 
@@ -39,9 +48,19 @@ class CoreGenAI:
 
     def _build_client(self) -> genai.Client:
         """Constructs the Google Client based on config."""
+        project_id = self.config.google_project_id
+
+        # Auto-detect project ID if using Vertex and not explicitly set
+        if self.config.use_vertex and not project_id:
+            try:
+                _, project_id = google.auth.default()
+            except Exception:
+                # Fallback or let the SDK handle the error later if strictly needed
+                pass
+
         return genai.Client(
             vertexai=self.config.use_vertex,
-            project=self.config.google_project_id if self.config.use_vertex else None,
+            project=project_id if self.config.use_vertex else None,
             location=self.config.google_location if self.config.use_vertex else None,
             api_key=self.config.google_api_key if not self.config.use_vertex else None,
         )
