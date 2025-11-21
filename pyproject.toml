@@ -1,7 +1,7 @@
 [project]
 name = "coregenai"
-version = "0.3.1"
-description = "The Production-Grade Wrapper for Google Gemini."
+version = "0.3.2"
+description = "A Wrapper for Google Gemini."
 authors = [{ name = "Saadman Rafat", email = "saadman@outlook.com" }]
 keywords = ["gemini", "vertex-ai", "google", "ai", "llm", "generative-ai", "genai"]
 classifiers = [

@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/coregenai.svg)](https://badge.fury.io/py/coregenai)
 
 
-**The production-grade wrapper for Google's Gemini SDK.**  
+**The wrapper for Google's Gemini SDK.**  
 *Stop rewriting retry loops. Stop debugging cryptic auth errors.*
 
 ![](ext/coregenai.png)
@@ -19,9 +19,9 @@ The official `google-genai` SDK is powerful, but raw. To run it in production, y
 | **Resilience** | Manual `try/except` loops | **Auto-Retries w/ Jitter** (Handles 429/503) |
 | **Auth** | Complex IAM vs Key logic | **Auto-Detects** (Vertex vs Studio)          |
 
-### This is an experimental prototype (coregenai v0.3.1)
+### This is an experimental prototype (coregenai v0.3.2)
 
-## 🐍 Python Usage
+## Python Usage
 
 ### 1. The "Type-Safe" Generator
 Stop parsing JSON with regex. Define a Pydantic model, and CoreGenAI guarantees the output matches it.
