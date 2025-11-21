@@ -19,7 +19,7 @@ The official `google-genai` SDK is powerful, but raw. To run it in production, y
 | **Resilience** | Manual `try/except` loops | **Auto-Retries w/ Jitter** (Handles 429/503) |
 | **Auth** | Complex IAM vs Key logic | **Auto-Detects** (Vertex vs Studio)          |
 
-### This is an experimental prototype (coregenai v0.3.0)
+### This is an experimental prototype (coregenai v0.3.1)
 
 ## 🐍 Python Usage
 
@@ -103,17 +103,7 @@ config = GenConfig(
 )
 ```
 
-
-
-
-
-
-
 ## Installation
-
-```bash
-cp .env.example .env
-```
 
 ```bash
 pip install coregenai
