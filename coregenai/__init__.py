@@ -8,7 +8,7 @@ from coregenai.retry import with_retry
 from coregenai.interfaces import GenInterceptor
 from coregenai.core import CoreGenAI, SafetyViolationError
 
-__version__ = "0.3.2"
+__version__ = "0.3.3"
 
 
 __all__ = [

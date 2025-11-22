@@ -1,9 +1,5 @@
-import asyncio
-import logging
-import time
-
 from abc import ABC
-from typing import Any, Coroutine, Iterable, TypeVar
+from typing import Any
 
 
 class GenInterceptor(ABC):

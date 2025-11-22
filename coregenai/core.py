@@ -67,10 +67,7 @@ class CoreGenAI:
 
     @with_retry(max_retries=3)
     async def _execute_call(
-        self,
-        model: str,
-        contents: Any,
-        config: types.GenerateContentConfig,
+        self, model: str, contents: Any, config: types.GenerateContentConfig
     ) -> types.GenerateContentResponse:
         """Internal executor wrapped with Retry Logic. Handles Mock Mode logic here."""
         # 1. Mock Mode Check
@@ -89,7 +86,6 @@ class CoreGenAI:
                 ]
             )
 
-        # 2. Live Call (using asynchronous client)
         return await self.client.aio.models.generate_content(
             model=model, contents=contents, config=config
         )
@@ -123,8 +119,7 @@ class CoreGenAI:
                 await hook.on_error(error=e)
             raise  # Re-raise exception while preserving the original traceback
 
-    # Using Python 3.12's new syntax for generic functions (PEP 695)
-    async def generate_struct[T: BaseModel](
+    async def generate_struct(
         self, prompt: str, schema: type[T], model: str | None = None
     ) -> T:
         """
